@@ -1,0 +1,20 @@
+# Copy to .github/workflows/validate-invoices.yml in your repository.
+name: Validate e-invoices
+on:
+  push:
+    paths: ['invoices/**']
+  pull_request:
+    paths: ['invoices/**']
+
+jobs:
+  xrechnung:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: xrechnung-dev/xrechnung-validate-action@v1
+        with:
+          files: |
+            invoices/**/*.xml
+            invoices/**/*.pdf
+          # optional; without a key the free tier allows 10 documents per month
+          api-key: ${{ secrets.XRECHNUNG_API_KEY }}

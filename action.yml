@@ -1,0 +1,27 @@
+name: XRechnung Validate
+description: Validate XRechnung / ZUGFeRD / EN 16931 e-invoices with the official KoSIT rules. No JVM, no Docker.
+author: xrechnung.dev
+branding:
+  icon: check-circle
+  color: green
+inputs:
+  files:
+    description: Glob(s) of invoices to check, space or newline separated (XML or ZUGFeRD/Factur-X PDF), e.g. 'invoices/**/*.xml'. '**' recurses.
+    required: true
+  api-key:
+    description: xrechnung.dev API key (pass it from a secret). Optional - without a key the free tier allows 10 documents per month.
+    required: false
+    default: ''
+  api-url:
+    description: API base URL (only change for testing).
+    required: false
+    default: https://xrechnung.dev
+runs:
+  using: composite
+  steps:
+    - shell: bash
+      run: python3 "$GITHUB_ACTION_PATH/validate.py"
+      env:
+        INPUT_FILES: ${{ inputs.files }}
+        INPUT_API_KEY: ${{ inputs.api-key }}
+        INPUT_API_URL: ${{ inputs.api-url }}
