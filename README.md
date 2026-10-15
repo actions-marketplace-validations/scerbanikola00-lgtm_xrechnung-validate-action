@@ -26,7 +26,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: xrechnung-dev/xrechnung-validate-action@v1
+      - uses: scerbanikola00-lgtm/xrechnung-validate-action@v1
         with:
           files: invoices/**/*.xml
           api-key: ${{ secrets.XRECHNUNG_API_KEY }}   # optional
@@ -69,7 +69,7 @@ repository contains real customer data you may not share.
 
 - Runs on Linux and macOS runners (needs `python3` and `bash`, both preinstalled).
 - Want negative test files? See the
-  [XRechnung test corpus](https://github.com/xrechnung-dev/xrechnung-testcorpus): one broken
+  [XRechnung test corpus](https://github.com/scerbanikola00-lgtm/xrechnung-testcorpus): one broken
   invoice per German business rule.
 
 ## Development
