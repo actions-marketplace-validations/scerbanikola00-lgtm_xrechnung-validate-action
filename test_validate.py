@@ -9,9 +9,9 @@ INVALID = {"valid": False, "scenario": "EN16931 XRechnung (CII)", "profile": "",
                       {"code": "BR-DE-23-a", "message": "[BR-DE-23-a] BG-17 fehlt, 100% sicher", "location": "/y"}],
            "warnings": [{"code": "BR-DE-27", "message": "[BR-DE-27] In BT-42 sollen mindestens drei Ziffern enthalten sein.", "location": "/z"}],
            "informations": [], "counts": {"errors": 2, "warnings": 1, "informations": 0},
-           "filename": "bad.xml", "usage": {"plan": "free", "used": 2, "limit": 10}}
+           "filename": "bad.xml", "usage": {"plan": "free", "used": 2, "limit": 30}}
 VALID = {"valid": True, "scenario": "EN16931 XRechnung (UBL Invoice)", "errors": [], "warnings": [], "informations": [],
-         "counts": {"errors": 0, "warnings": 0, "informations": 0}, "usage": {"plan": "free", "used": 1, "limit": 10}}
+         "counts": {"errors": 0, "warnings": 0, "informations": 0}, "usage": {"plan": "free", "used": 1, "limit": 30}}
 seen = []
 
 
@@ -20,7 +20,7 @@ class Mock(BaseHTTPRequestHandler):
         body = self.rfile.read(int(self.headers["Content-Length"]))
         seen.append((self.path, self.headers.get("x-api-key"), self.headers["Content-Type"], body))
         if b"QUOTA" in body:
-            code, out = 429, {"detail": "monthly limit reached (10 documents on the Free plan)."}
+            code, out = 429, {"detail": "monthly limit reached (30 documents on the Free plan)."}
         else:
             code, out = 200, (INVALID if b"BROKEN" in body else VALID)
         data = json.dumps(out).encode()
@@ -67,7 +67,7 @@ class ActionTest(unittest.TestCase):
         r = self.run_action({"invoices/good.xml": "<x/>"})
         self.assertEqual(r.returncode, 0, r.stdout)
         self.assertEqual(seen[0][1], None)
-        self.assertIn("usage this month: 1/10 (free)", r.stdout)
+        self.assertIn("usage this month: 1/30 (free)", r.stdout)
 
     def test_quota_exceeded_fails_with_hint(self):
         r = self.run_action({"invoices/q.xml": "<x>QUOTA</x>"})

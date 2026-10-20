@@ -59,7 +59,7 @@ def main():
                 detail = json.loads(detail).get("detail", detail)
             except ValueError:
                 pass
-            hint = " Add an api-key (free tier: 10 documents/month without one)." if e.code == 429 and not KEY else ""
+            hint = " Add an api-key (free tier: 30 documents/month without one)." if e.code == 429 and not KEY else ""
             print(f"::error file={esc(path, True)}::{esc(f'xrechnung.dev returned HTTP {e.code}: {detail}{hint}')}")
             failed += 1
             if e.code in (401, 429):  # every further request would fail the same way

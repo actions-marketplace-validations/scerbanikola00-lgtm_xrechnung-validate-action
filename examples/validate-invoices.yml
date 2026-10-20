@@ -16,5 +16,5 @@ jobs:
           files: |
             invoices/**/*.xml
             invoices/**/*.pdf
-          # optional; without a key the free tier allows 10 documents per month
+          # optional; without a key the free tier allows 30 documents per month
           api-key: ${{ secrets.XRECHNUNG_API_KEY }}

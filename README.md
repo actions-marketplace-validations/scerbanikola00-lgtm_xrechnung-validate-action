@@ -54,7 +54,7 @@ only runs when invoice files change.
 
 ## Free tier and API keys
 
-Without a key you get **10 documents per month** for free. For more, get a key at
+Without a key you get **30 documents per month** for free. For more, get a key at
 https://xrechnung.dev/#pricing, add it as a repository secret named `XRECHNUNG_API_KEY`
 (Settings → Secrets and variables → Actions → New repository secret) and pass it as shown
 above. When the monthly limit is reached the action fails with a clear HTTP 429 message.

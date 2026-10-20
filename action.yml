@@ -9,7 +9,7 @@ inputs:
     description: Glob(s) of invoices to check, space or newline separated (XML or ZUGFeRD/Factur-X PDF), e.g. 'invoices/**/*.xml'. '**' recurses.
     required: true
   api-key:
-    description: xrechnung.dev API key (pass it from a secret). Optional - without a key the free tier allows 10 documents per month.
+    description: xrechnung.dev API key (pass it from a secret). Optional - without a key the free tier allows 30 documents per month.
     required: false
     default: ''
   api-url:
